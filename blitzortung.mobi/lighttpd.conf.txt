@@ -1,0 +1,11 @@
+$HTTP["host"] == "www.blitzortung.mobi" {
+        url.rewrite = (
+                "^/m/(\w+)(?:$|\?(.+?)$)" => "index.php?view=$1&$2",
+                "^/p/badge/(\d{1,5})-(de|en)\.png$" => "index.php?view=sig_image&station_id=$1&lang=$2",
+                "^/p/ranking(?:$|\?(.+?)$)" => "index.php?view=station_ranking&_desktop_mode=1&$1"
+        )
+
+        $HTTP["url"] =~ "^/(tpl|content|cms|cache|lib|tool)/" {
+                url.access-deny += ( "" )
+        }
+}
